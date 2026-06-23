@@ -1,0 +1,63 @@
+<div class="container" >
+<button id="back" routerLink="">Back</button> <button id="view" routerLink="/view">View</button>   <button id="clear" (click)="clear()" type="submit">clear from</button>     
+
+<form action="" (ngSubmit)="register()">
+       
+ <h3>Register FROM</h3>
+
+
+
+  <label for="a">First name</label><br>
+  <input type="text"  id="a"  placeholder="first" name="first" [(ngModel)]="userdata.first" required><br>
+
+  <label for="b">last name</label><br>
+  <input type="text" id="b" name="lname"  placeholder="last"  name="last" [(ngModel)]="userdata.last" required><br>
+
+  <label for="">Gender</label><br>
+  <input type="radio" name="gender"  value="male"  [(ngModel)]="userdata.gender" >
+  <label for="" >male</label>
+
+  <input type="radio" value="female" name="gender"   [(ngModel)]="userdata.gender">
+  <label for="">female</label>
+
+
+  <input type="radio" name="gender" value="others"  [(ngModel)]="userdata.gender" >
+
+  <label for="">others</label><br>
+
+  <label for="c">Date of birth</label><br>
+
+  <input id="c" type="date" name="dob" [(ngModel)]="userdata.dob" required><br>
+
+  <label for="d">Address</label><br>
+  <textarea  id="d" placeholder="address" name="adr" [(ngModel)]="userdata.address"></textarea><br>
+
+  <label for="e">Pin code:</label><br>
+  <input id="e" type="number" placeholder="pin number" name="pincode" [(ngModel)]="userdata.pincode" required><br>
+
+  <label for="f">phone no:</label><br>
+  <input type="text" id="f" placeholder="phone number" name="phone" [(ngModel)]="userdata.phone" required><br>
+
+  <label for="g">Email id</label><br>
+  <input type="email" id="g" placeholder="enter email" name="email" [(ngModel)]="userdata.email" required><br>
+   
+<label for="h">state</label><br>
+<input type="text" id="h" placeholder="state" name="state" [(ngModel)]="userdata.state" required><br>
+
+<label for="i">country</label><br>
+<input type="text" placeholder="country" required id="i" name="country" [(ngModel)]="userdata.country"><br>
+
+<label for="l">id</label><br>
+<input type="text" placeholder="enter id" name="id" [(ngModel)]="userdata.id" required><br>
+
+ <label for="j">new password</label><br>
+ <input type="password" id="j" name="np" [(ngModel)]="userdata.np"><br>
+
+ <label for="k">confirm passsword</label><br>
+ <input type="password" id="k" required name="cp" [(ngModel)]="userdata.cp"><br>
+
+<button id="bt" type="submit">register</button> 
+
+    </form>
+
+</div>
