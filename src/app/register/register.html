@@ -1,20 +1,38 @@
-<div class="container" >
-<button id="back" routerLink="">Back</button> <button id="view" routerLink="/view">View</button>   <button id="clear" (click)="clear()" type="submit">clear from</button>     
+
+<div class="container-fluid align-items-center"></div>
+
+ <div class="col-12 col-md col-lg col-xl col-sm">
+
+
+<nav class="navbar bg-primary"style="padding: 10px; margin-bottom: 10px;" data-bs-theme="dark">
+    <button  class="btn btn-warning" routerLink="">Back</button>
+    <h3 style="color: white;">Welcom Admin</h3>
+    <div class="btn-group" role="group">
+     <button  class="btn btn-success" routerLink="/view">View</button>   <button class="btn btn-danger"  (click)="clear()" type="submit">clear from</button>     
+
+    </div>
+</nav>
+
+<div >
+
+<div class="container">
+
+
 
 <form action="" (ngSubmit)="register()">
        
- <h3>Register FROM</h3>
+ <h3 style="background-color: green;">Register FROM</h3>
 
 
 
-  <label for="a">First name</label><br>
-  <input type="text"  id="a"  placeholder="first" name="first" [(ngModel)]="userdata.first" required><br>
+  <label for="a" class="form-label">First name</label><br>
+  <input type="text"  class="form-control"  id="a"   placeholder="first" name="first" [(ngModel)]="userdata.first" required><br>
 
-  <label for="b">last name</label><br>
-  <input type="text" id="b" name="lname"  placeholder="last"  name="last" [(ngModel)]="userdata.last" required><br>
+  <label for="b" class="form-label">last name</label><br>
+  <input type="text" id="b" class="form-control" name="lname"  placeholder="last"  name="last" [(ngModel)]="userdata.last" required><br>
 
-  <label for="">Gender</label><br>
-  <input type="radio" name="gender"  value="male"  [(ngModel)]="userdata.gender" >
+  <label for=""  >Gender</label><br>
+  <input type="radio"  name="gender"  value="male"  [(ngModel)]="userdata.gender" >
   <label for="" >male</label>
 
   <input type="radio" value="female" name="gender"   [(ngModel)]="userdata.gender">
@@ -23,11 +41,11 @@
 
   <input type="radio" name="gender" value="others"  [(ngModel)]="userdata.gender" >
 
-  <label for="">others</label><br>
+  <label for="" class="form-label">others</label><br>
 
   <label for="c">Date of birth</label><br>
 
-  <input id="c" type="date" name="dob" [(ngModel)]="userdata.dob" required><br>
+  <input id="c" type="date" class="form-control" name="dob" [(ngModel)]="userdata.dob" required><br>
 
   <label for="d">Address</label><br>
   <textarea  id="d" placeholder="address" name="adr" [(ngModel)]="userdata.address"></textarea><br>
@@ -41,11 +59,25 @@
   <label for="g">Email id</label><br>
   <input type="email" id="g" placeholder="enter email" name="email" [(ngModel)]="userdata.email" required><br>
    
-<label for="h">state</label><br>
-<input type="text" id="h" placeholder="state" name="state" [(ngModel)]="userdata.state" required><br>
+<label for="h">State</label><br>
+
+<select class="form-select" aria-label="Default select example" id="h" name="state" [(ngModel)]="userdata.state" required>
+  <option value="">-- Select State --</option>
+  <option *ngFor="let state of states" >
+    {{ state.name }}
+  </option>
+</select>
+<br>
 
 <label for="i">country</label><br>
-<input type="text" placeholder="country" required id="i" name="country" [(ngModel)]="userdata.country"><br>
+<select class="form-select" aria-label="Default select example"  id="i" name="country" [(ngModel)]="userdata.country" required>
+    <option value="">--country--</option>
+    <option *ngFor="let country of countrys" >{{country.name}}</option>
+
+
+</select>
+<br>
+
 
 <label for="l">id</label><br>
 <input type="text" placeholder="enter id" name="id" [(ngModel)]="userdata.id" required><br>
@@ -56,8 +88,21 @@
  <label for="k">confirm passsword</label><br>
  <input type="password" id="k" required name="cp" [(ngModel)]="userdata.cp"><br>
 
-<button id="bt" type="submit">register</button> 
+ <label for="">
+    <input type="checkbox" required>
+        I agree to the terms and conditions
+ </label><br>
+<div class="d-grid gap-2 col-12 mx-auto">
+    <button class="btn btn-primary" type="submit">register</button> 
+
+
+</div>
 
     </form>
 
 </div>
+</div>
+
+</div>
+
+
