@@ -8,7 +8,7 @@
     <button  class="btn btn-warning" routerLink="">Back</button>
     <h3 style="color: white;">Welcom Admin</h3>
     <div class="btn-group" role="group">
-     <button  class="btn btn-success" routerLink="/view">View</button>   <button class="btn btn-danger"  (click)="clear()" type="submit">clear from</button>     
+     <button  class="btn btn-success" routerLink="/view">View</button>   <button class="btn btn-danger"  (click)="clear()" type="submit">Clear From</button>     
 
     </div>
 </nav>
@@ -21,79 +21,161 @@
 
 <form action="" (ngSubmit)="register()">
        
- <h3 style="background-color: green;">RegisterFORM</h3>
+ <h3 style="background-color: green;">Register FORM</h3>
 
 
 
-  <label for="a" class="form-label">First name</label><br>
-  <input type="text"  class="form-control"  id="a"   placeholder="first" name="first" [(ngModel)]="userdata.first" required><br>
+  <label for="a" class="form-label">First Name</label><br>
+  <input type="text"id="a"  #first="ngModel"  placeholder="First" name="first"  [(ngModel)]="userdata.first" required  maxlength="30" pattern="^[A-Za-z]$"><br>
 
-  <label for="b" class="form-label">last name</label><br>
-  <input type="text" id="b" class="form-control" name="lname"  placeholder="last"  name="last" [(ngModel)]="userdata.last" required><br>
+
+  <div *ngIf="first.invalid && first.touched">
+  <span *ngIf="first.errors?.['required']" style="color: red;">
+    First name is required.
+  </span>
+  </div>
+
+<div *ngIf="first.invalid && first.touched">
+
+  <span *ngIf="first.errors?.['pattern']" style="color: red;">
+    Only letters are allowed
+  </span>
+
+</div>
+
+
+<div *ngIf="first.invalid && first.touched">
+
+  <span *ngIf="first.errors?.['maxlength']" style="color: red;">
+    Maximum limit exceeded
+  </span>
+
+</div>
+
+  <label for="b" class="form-label">Last Name</label><br>
+  <input type="text" id="b"  name="lname" #last="ngModel"  placeholder="Last"  name="last" [(ngModel)]="userdata.last" required pattern="^[A-Za-z]$" maxlength="30"><br>
+
+
+  <div *ngIf="last.invalid && last.touched">
+
+  <span *ngIf="last.errors?.['pattern']" style="color: red;">
+     Only letters are allowed
+  </span>
+
+</div>
+
+<div *ngIf="last.invalid && last.touched">
+    <span *ngIf="last.errors?.['maxlength']" style="color: red;">
+
+        Maximum limit exceeded
+    </span>
+</div>
+
 
   <label for=""  >Gender</label><br>
-  <input type="radio"  name="gender"  value="male"  [(ngModel)]="userdata.gender" >
-  <label for="" >male</label>
+  <input type="radio"  name="Gender" #gender="ngModel"   value="male"  [(ngModel)]="userdata.gender"  required>
 
-  <input type="radio" value="female" name="gender"   [(ngModel)]="userdata.gender">
-  <label for="">female</label>
+  <label for="" >Male</label>
+
+  <input type="radio" value="Female" name="gender"   [(ngModel)]="userdata.gender">
+  <label for="">Female</label>
 
 
   <input type="radio" name="gender" value="others"  [(ngModel)]="userdata.gender" >
 
-  <label for="" class="form-label">others</label><br>
+  <label for="" class="form-label">Others</label><br>
 
-  <label for="c">Date of birth</label><br>
+  <div *ngIf="gender.invalid && gender.touched">
+  <span *ngIf="gender.errors?.['required']" style="color: red;">
+    Gender is required.
+  </span>
+  </div>
 
-  <input id="c" type="date" class="form-control" name="dob" [(ngModel)]="userdata.dob" required><br>
+  <label for="c">Date Of Birth</label><br>
+
+  <input id="c" type="date"  name="dob" [(ngModel)]="userdata.dob" #date="ngModel" required  ><br>
+
+  <div *ngIf="date.invalid && date.touched">
+
+  <span *ngIf="date.errors?.['required']" style="color: red;">
+     Date of birth is required
+  </span>
+
+</div>
+
+
 
   <label for="d">Address</label><br>
-  <textarea  id="d" placeholder="address" name="adr" [(ngModel)]="userdata.address"></textarea><br>
+  <textarea  id="d" placeholder="Address" name="adr" #address="ngModel" [(ngModel)]="userdata.address" required></textarea><br>
 
-  <label for="e">Pin code:</label><br>
-  <input id="e" type="number" placeholder="pin number" name="pincode" [(ngModel)]="userdata.pincode" required><br>
+  <div *ngIf="address.invalid && address.touched">
 
-  <label for="f">phone no:</label><br>
-  <input type="text" id="f" placeholder="phone number" name="phone" [(ngModel)]="userdata.phone" required><br>
+  <span *ngIf="address.errors?.['required']" style="color: red;">
+     Address is required
+  </span>
 
-  <label for="g">Email id</label><br>
-  <input type="email" id="g" placeholder="enter email" name="email" [(ngModel)]="userdata.email" required><br>
+</div>
+  <label for="e">Pin Code:</label><br>
+  <input id="e" type="text" placeholder="Pin Number" #pincode="ngModel" name="pincode" [(ngModel)]="userdata.pincode" required  pattern="^[0-9]+$" maxlength="6"><br>
+  
+  <div *ngIf="pincode.invalid && pincode.touched">
+
+  <span *ngIf="pincode.errors?.['required']" style="color: red;">
+     Pin code  is required
+  </span>
+
+</div>
+
+<div *ngIf="pincode.invalid && pincode.touched">
+
+  <span *ngIf="pincode.errors?.['pattern']" style="color: red;">
+     Only number are allowed
+  </span>
+
+</div>
+
+
+
+  <label for="f">Phone Number:</label><br>
+  <input type="text" id="f" placeholder="Phone Number" name="phone" [(ngModel)]="userdata.phone" required><br>
+
+  <label for="g">Email ID</label><br>
+  <input type="email" id="g" placeholder="Enter Email" name="email" [(ngModel)]="userdata.email" required><br>
    
 <label for="h">State</label><br>
 
-<select class="form-select" aria-label="Default select example" id="h" name="state" [(ngModel)]="userdata.state" required>
+<select class="form-select" aria-label="Default select example" id="h" name="state" [(ngModel)]="userdata.stateId" required>
   <option value="">-- Select State --</option>
-  <option *ngFor="let state of states" >
+  <option *ngFor="let state of states" [value]="state.id"  >
     {{ state.name }}
   </option>
 </select>
 <br>
 
-<label for="i">country</label><br>
-<select class="form-select" aria-label="Default select example"  id="i" name="country" [(ngModel)]="userdata.country" required>
-    <option value="">--country--</option>
-    <option *ngFor="let country of countrys" >{{country.name}}</option>
+<label for="i">Country</label><br>
+<select class="form-select" aria-label="Default select example"  id="i" name="country" [(ngModel)]="userdata.countryId" required>
+    <option value="">--Country--</option>
+    <option *ngFor="let country of countrys" [value]="country.id" >{{country.name}}</option>
 
 
 </select>
 <br>
 
 
-<label for="l">id</label><br>
-<input type="text" placeholder="enter id" name="id" [(ngModel)]="userdata.id" required><br>
 
- <label for="j">new password</label><br>
+
+ <label for="j">Password</label><br>
  <input type="password" id="j" name="np" [(ngModel)]="userdata.np"><br>
 
- <label for="k">confirm passsword</label><br>
+ <label for="k">Confirm Passsword</label><br>
  <input type="password" id="k" required name="cp" [(ngModel)]="userdata.cp"><br>
 
  <label for="">
-    <input type="checkbox" required>
+    <input type="checkbox" name="ck" [(ngModel)]="userdata.ck" required>
         I agree to the terms and conditions
  </label><br>
 <div class="d-grid gap-2 col-12 mx-auto">
-    <button class="btn btn-primary" type="submit">register</button> 
+    <button class="btn btn-primary" type="submit">Register</button> 
 
 
 </div>

@@ -22,8 +22,8 @@
       <th>ID</th>
       <th>New Password</th>
       <th>Confirm Password</th>
-      <th>Delete</th>
-      <th>Details</th>
+      <th>Terms and conditions staus</th>
+      
     </tr>
   
 
@@ -37,11 +37,14 @@
       <td>{{ item.pincode }}</td>
       <td>{{ item.phone }}</td>
       <td>{{ item.email }}</td>
-      <td>{{ item.state }}</td>
-      <td>{{ item.country }}</td>
+      <td>{{ getStateName(item.stateId)}}</td>
+      <td>{{getCountryName (item.countryId) }}</td>
       <td>{{ item.id }}</td>
       <td>{{ item.np }}</td>
       <td>{{ item.cp }}</td>
+      <td [style.color]="item.color">
+  {{ item.ck}}
+</td>
 
       <td>
         <button class="btn btn-danger btn-sm" (click)="deleteRow(i)">

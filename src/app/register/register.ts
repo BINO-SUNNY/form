@@ -22,12 +22,14 @@ export class Register {
    pincode:'',
    phone:'',
    email:'',
-   state:'',
-   country:'',
+   stateId:'',
+   countryId:'',
    id:'',
    np:'',
-   cp:''
+   cp:'',
+   ck:''
  }
+
 
 
    states = [
@@ -59,18 +61,25 @@ register(){
   
   
 
-  if(this.userdata.id!="admin"){
-    alert("id is wrong..")
 
-  }
   
   
-  else if(this.userdata.np!=this.userdata.cp){
+   if(this.userdata.np!=this.userdata.cp){
     alert("password is not maching")
   }
   else{
     this.ds.setData(this.userdata);
     console.log(this.userdata);
+    console.log(this.userdata.ck);
+
+    console.log(this.userdata.stateId);
+
+    console.log(this.userdata.countryId);
+    
+
+
+    
+    
     alert("register successful")
   }
 
@@ -87,11 +96,12 @@ clear(){
     pincode: '',
     phone: '',
     email: '',
-    state: '',
-    country: '',
+    stateId: '',
+    countryId: '',
     id: '',
     np: '',
-    cp: ''
+    cp: '',
+    ck:''
   };
 
 }
