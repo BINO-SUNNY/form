@@ -19,15 +19,14 @@ export class Register {
    gender:'',
    dob:'',
    address:'',
-   pincode:0,
+   pinCode:'',    
    phone:'',
    email:'',
    stateId:'',
    countryId:'',
-   id:'',
-   np:'',
-   cp:'',
-   ck:''
+   newPassword:'',
+   confirmPassword:'',
+   checkBox:''
  }
 
 
@@ -52,39 +51,25 @@ constructor(private ds:Data){}
 
 
 
+// this.userdata.pinCode = Number(this.userdata.pinCode)
 
 
+register(form: any) {
+  debugger
 
-register(){
-
-  
-
-  
-   if(this.userdata.np!=this.userdata.cp){
-    alert("password is not maching")
-  }
-  else{
-
-  this.userdata.pincode = +(this.userdata.pincode);
-
-    this.ds.setData(this.userdata);
-
-    console.log(this.userdata);
-    console.log(this.userdata.ck);
-
-    console.log(this.userdata.stateId);
-
-    console.log(this.userdata.countryId);
-    
-
-    console.log(this.userdata.pincode);
-    
-
-    
-    
-    alert("register successful")
+  if (form.invalid) {
+    alert("Please fill all required fields correctly");
+    return;
   }
 
+  if (this.userdata.newPassword !== this.userdata.confirmPassword) {
+    alert("Password not matching");
+    return;
+  }
+
+  this.ds.setData(this.userdata);
+  alert("Register successful");
+  this.clear()
 }
 
 clear(){
@@ -95,18 +80,59 @@ clear(){
     gender: '',
     dob: '',
     address: '',
-    pincode:0,
+    pinCode:'',
     phone: '',
     email: '',
     stateId: '',
     countryId: '',
-    id: '',
-    np: '',
-    cp: '',
-    ck:''
+    newPassword: '',
+    confirmPassword: '',
+    checkBox:''
   };
 
 }
+onlyAlphabets(event: KeyboardEvent) {
+  const key = event.key;
+
+  if (!/^[a-zA-Z ]$/.test(key)) {
+    event.preventDefault();
+  }
+}
+
+onlyAlphabetsAndNumber(event: KeyboardEvent) {
+  const key = event.key;
+
+if (!/^[a-zA-Z0-9 ,./#-]$/.test(key)) {
+    event.preventDefault();
+  }
+}
+
+onlyNumber(event:KeyboardEvent){
+  const key =event.key
+
+  if(!/^[0-9]$/.test(key)){
+    event.preventDefault()
+  }
+}
+
+
+forEmail(event:KeyboardEvent){
+  const key =event.key
+
+  if(!/^[a-zA-Z0-9@._+-]$/.test(key)){
+    event.preventDefault()
+  }
+}
+
+
+forPassword(event:KeyboardEvent){
+  const key =event.key
+
+  if(!/^[a-zA-Z0-9@#$%&_+\-!*]$/.test(key)){
+    event.preventDefault()
+  }
+}
+
 
 
 

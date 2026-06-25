@@ -15,6 +15,9 @@ export class View {
 
   selectedUser: any;
 
+itemsWithNames: any[] = [];
+
+
   states = [
     { id: 1, name: 'Kerala' },
     { id: 2, name: 'Tamil Nadu' },
@@ -39,16 +42,24 @@ export class View {
     this.data=this.ds.getData()
 
     this.data.forEach((item:any)=>{
-      console.log(item.ck);
+      console.log(item.checkBox);
 
-      if(item.ck){
+      if(item.checkBox){
         item.color='green'
+        item.termsText='Terms and conditions agreed'
       }
       else{
         item.color='red'
+        item.termsText = 'Terms and conditions not agreed';
       }
       
     })
+
+
+    this.data.forEach(item => {
+  item.stateName = this.states.find(s => s.id == item.stateId)?.name || '';
+  item.countryName = this.countrys.find(c => c.id == item.countryId)?.name || '';
+});
     
     console.log(this.data);
     
@@ -71,12 +82,11 @@ Details(item: any) {
 
 
 
-getStateName(id: any): string {
-  return this.states.find(s => s.id == id)?.name  || '';
-}
-
-getCountryName(id:any):string{
-  return this.countrys.find(c=>c.id==id)?.name || ''
+prepareItems() {
+  this.data.forEach(item => {
+    item.stateName = this.states.find(s => s.id == item.stateId)?.name || '';
+    item.countryName = this.countrys.find(c => c.id == item.countryId)?.name || '';
+  });
 }
 
 
