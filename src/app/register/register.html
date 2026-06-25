@@ -1,191 +1,277 @@
+<div class="container-fluid align-items-center">
 
-<div class="container-fluid align-items-center"></div>
-
- <div class="col-12 col-md col-lg col-xl col-sm">
+<div class="col-12 col-md col-lg col-xl col-sm">
 
 
-<nav class="navbar bg-primary"style="padding: 10px; margin-bottom: 10px;" data-bs-theme="dark">
-    <button  class="btn btn-warning" routerLink="">Back</button>
+  <nav class="navbar bg-primary" style="padding: 10px; margin-bottom: 10px;" data-bs-theme="dark">
+    <button class="btn btn-warning" routerLink="">Back</button>
     <h3 style="color: white;">Welcom Admin</h3>
     <div class="btn-group" role="group">
-     <button  class="btn btn-success" routerLink="/view">View</button>   <button class="btn btn-danger"  (click)="clear()" type="submit">Clear From</button>     
+      <button class="btn btn-success" routerLink="/view">View</button> <button class="btn btn-danger" (click)="clear()"
+        type="submit">Clear From</button>
 
     </div>
-</nav>
+  </nav>
 
-<div >
+  <div>
 
-<div class="container">
+    <div class="container">
 
 
 
-<form action="" (ngSubmit)="register()">
+      <form action="" (ngSubmit)="register()">
         <h3 style="background-color: green;">Register FORM</h3>
 
 
 
 
 
-  <label for="a" class="form-label">First Name</label><br>
-  <input type="text"id="a"  #first="ngModel"  placeholder="First" name="first"  [(ngModel)]="userdata.first" required  maxlength="30" pattern="^[A-Za-z]$"><br>
+        <label for="a" class="form-label">First Name<span style="color:red">*</span></label><br>
+        <input type="text" id="a" #first="ngModel" placeholder="First" name="first" [(ngModel)]="userdata.first"
+          required maxlength="30" pattern="^[A-Za-z]$"><br>
 
 
-  <div *ngIf="first.invalid && first.touched">
-  <span *ngIf="first.errors?.['required']" style="color: red;">
-    First name is required.
-  </span>
+        <div *ngIf="first.invalid && first.touched">
+          <span *ngIf="first.errors?.['required']" style="color: red;">
+            First name is required.
+          </span>
+        </div>
+
+        <div *ngIf="first.invalid && first.touched">
+
+          <span *ngIf="first.errors?.['pattern']" style="color: red;">
+            Only letters are allowed
+          </span>
+
+        </div>
+
+
+        <div *ngIf="first.invalid && first.touched">
+
+          <span *ngIf="first.errors?.['maxlength']" style="color: red;">
+            Maximum limit exceeded
+          </span>
+
+        </div>
+
+        <label for="b" class="form-label">Last Name</label><br>
+        <input type="text" id="b" name="lname" #last="ngModel" placeholder="Last" name="last"
+          [(ngModel)]="userdata.last" required pattern="^[A-Za-z]$" maxlength="30"><br>
+
+
+        <div *ngIf="last.invalid && last.touched">
+
+          <span *ngIf="last.errors?.['pattern']" style="color: red;">
+            Only letters are allowed
+          </span>
+
+        </div>
+
+        <div *ngIf="last.invalid && last.touched">
+          <span *ngIf="last.errors?.['maxlength']" style="color: red;">
+
+            Maximum limit exceeded
+          </span>
+        </div>
+
+
+        <label for="">Gender<span style="color:red">*</span></label><br>
+        <input type="radio" name="Gender" #gender="ngModel" value="male" [(ngModel)]="userdata.gender" required>
+
+        <label for="">Male</label>
+
+        <input type="radio" value="Female" name="gender" [(ngModel)]="userdata.gender">
+        <label for="">Female</label>
+
+
+        <input type="radio" name="gender" value="others" [(ngModel)]="userdata.gender">
+
+        <label for="" class="form-label">Others</label><br>
+
+        <div *ngIf="gender.invalid && gender.touched">
+          <span *ngIf="gender.errors?.['required']" style="color: red;">
+            Gender is required.
+          </span>
+        </div>
+
+        <label for="c">Date Of Birth<span style="color:red">*</span></label><br>
+
+        <input id="c" type="date" name="dob" [(ngModel)]="userdata.dob" #date="ngModel" required><br>
+
+        <div *ngIf="date.invalid && date.touched">
+
+          <span *ngIf="date.errors?.['required']" style="color: red;">
+            Date of birth is required
+          </span>
+
+        </div>
+
+
+
+        <label for="d">Address<span style="color:red">*</span></label><br>
+        <textarea id="d" placeholder="Address" name="adr" #address="ngModel" [(ngModel)]="userdata.address"
+          required></textarea><br>
+
+        <div *ngIf="address.invalid && address.touched">
+
+          <span *ngIf="address.errors?.['required']" style="color: red;">
+            Address is required
+          </span>
+
+        </div>
+        <label for="e">Pin Code:<span style="color:red">*</span></label><br>
+        <input id="e" type="text" placeholder="Pin Number" #pincode="ngModel" name="pincode"
+          [(ngModel)]="userdata.pincode" required pattern="^[0-9]+$" maxlength="6"><br>
+
+        <div *ngIf="pincode.invalid && pincode.touched">
+
+          <span *ngIf="pincode.errors?.['required']" style="color: red;">
+            Pin code is required
+          </span>
+
+        </div>
+
+        <div *ngIf="pincode.invalid && pincode.touched">
+
+          <span *ngIf="pincode.errors?.['pattern']" style="color: red;">
+            Only number are allowed
+          </span>
+
+        </div>
+
+
+
+        <label for="f">Phone Number:<span style="color:red">*</span></label><br>
+        <input type="text" id="f" placeholder="Phone Number" #phone="ngModel" name="phone" [(ngModel)]="userdata.phone" required  pattern="^\+?[0-9]{7,15}$"><br>
+         
+        <div *ngIf="phone.invalid && phone.touched">
+
+          <span *ngIf="phone.errors?.['required']" style="color: red;">
+            Phone number is required
+          </span>
+
+        </div>
+
+        <div *ngIf="phone.invalid && phone.touched">
+
+          <span *ngIf="phone.errors?.['pattern']" style="color: red;">
+            Please enter a valid phone number.
+          </span>
+
+        </div>
+
+
+
+        <label for="g">Email ID<span style="color:red">*</span></label><br>
+        <input type="email" id="g" placeholder="Enter Email" #email="ngModel" name="email" [(ngModel)]="userdata.email" required  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" ><br>
+
+        <div *ngIf="email.invalid && email.touched">
+
+          <span *ngIf="email.errors?.['required']" style="color: red;">
+            email is required
+          </span>
+
+        </div>
+
+        <div *ngIf="email.invalid && email.touched">
+
+          <span *ngIf="email.errors?.['pattern']" style="color: red;">
+            Please enter a valid Email.
+          </span>
+
+        </div>
+        
+
+
+        <label for="h">State<span style="color:red">*</span></label><br>
+
+        <select class="form-select" #state="ngModel"  id="h" name="state"[(ngModel)]="userdata.stateId" required>
+
+       
+          <option value="">-- Select State --</option>
+          <option *ngFor="let state of states" [value]="state.id">
+            {{ state.name }}
+          </option>
+        </select>
+
+        <div *ngIf="state.invalid && state.touched">
+
+          <span *ngIf="state.errors?.['required']" style="color: red;">
+            State is required
+          </span>
+
+        </div>
+          
+        <br>
+
+        <label for="i">Country<span style="color:red">*</span></label><br>
+        <select class="form-select" aria-label="Default select example" #country="ngModel" id="i" name="country"[(ngModel)]="userdata.countryId" required>
+          
+          <option value="">--Country--</option>
+          <option *ngFor="let country of countrys" [value]="country.id">{{country.name}}</option>
+
+
+        </select>
+
+        <div *ngIf="country.invalid && country.touched">
+
+          <span *ngIf="country.errors?.['required']" style="color: red;">
+            country is required
+          </span>
+
+        </div>
+        <br>
+
+
+
+
+        <label for="j">Password<span style="color:red">*</span></label><br>
+        <input type="password" id="j" name="np" #newp="ngModel" [(ngModel)]="userdata.np" required maxlength="7" pattern="(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}">
+
+        <div *ngIf="newp.invalid && newp.touched">
+
+          <span *ngIf="newp.errors?.['required']" style="color: red;">
+            password is required
+          </span>
+        </div>
+
+        <div *ngIf="newp.invalid && newp.touched">
+
+          <span *ngIf="newp.errors?.['pattern']" style="color: red;">
+            At least 8 chars, uppercase, lowercase, number, special character
+          </span>
+        </div>
+        
+        
+        <br>
+
+        <label for="k">Confirm Passsword<span style="color:red">*</span></label><br>
+        <input type="password" id="k" required name="cp" [(ngModel)]="userdata.cp">
+
+        <div *ngIf="newp.invalid && newp.touched">
+
+          <span *ngIf="newp.errors?.['required']" style="color: red;">
+          Confirm  password is required
+          </span>
+        </div>
+        
+        <br>
+
+        <label for="">
+          <input type="checkbox" name="ck" [(ngModel)]="userdata.ck" >
+          I agree to the terms and conditions
+        </label><br>
+        <div class="d-grid gap-2 col-12 mx-auto">
+          <button class="btn btn-primary" type="submit">Register</button>
+
+
+        </div>
+
+      </form>
+
+    </div>
   </div>
 
-<div *ngIf="first.invalid && first.touched">
-
-  <span *ngIf="first.errors?.['pattern']" style="color: red;">
-    Only letters are allowed
-  </span>
-
-</div>
-
-
-<div *ngIf="first.invalid && first.touched">
-
-  <span *ngIf="first.errors?.['maxlength']" style="color: red;">
-    Maximum limit exceeded
-  </span>
-
-</div>
-
-  <label for="b" class="form-label">Last Name</label><br>
-  <input type="text" id="b"  name="lname" #last="ngModel"  placeholder="Last"  name="last" [(ngModel)]="userdata.last" required pattern="^[A-Za-z]$" maxlength="30"><br>
-
-
-  <div *ngIf="last.invalid && last.touched">
-
-  <span *ngIf="last.errors?.['pattern']" style="color: red;">
-     Only letters are allowed
-  </span>
-
-</div>
-
-<div *ngIf="last.invalid && last.touched">
-    <span *ngIf="last.errors?.['maxlength']" style="color: red;">
-
-        Maximum limit exceeded
-    </span>
-</div>
-
-
-  <label for=""  >Gender</label><br>
-  <input type="radio"  name="Gender" #gender="ngModel"   value="male"  [(ngModel)]="userdata.gender"  required>
-
-  <label for="" >Male</label>
-
-  <input type="radio" value="Female" name="gender"   [(ngModel)]="userdata.gender">
-  <label for="">Female</label>
-
-
-  <input type="radio" name="gender" value="others"  [(ngModel)]="userdata.gender" >
-
-  <label for="" class="form-label">Others</label><br>
-
-  <div *ngIf="gender.invalid && gender.touched">
-  <span *ngIf="gender.errors?.['required']" style="color: red;">
-    Gender is required.
-  </span>
-  </div>
-
-  <label for="c">Date Of Birth</label><br>
-
-  <input id="c" type="date"  name="dob" [(ngModel)]="userdata.dob" #date="ngModel" required  ><br>
-
-  <div *ngIf="date.invalid && date.touched">
-
-  <span *ngIf="date.errors?.['required']" style="color: red;">
-     Date of birth is required
-  </span>
-
-</div>
-
-
-
-  <label for="d">Address</label><br>
-  <textarea  id="d" placeholder="Address" name="adr" #address="ngModel" [(ngModel)]="userdata.address" required></textarea><br>
-
-  <div *ngIf="address.invalid && address.touched">
-
-  <span *ngIf="address.errors?.['required']" style="color: red;">
-     Address is required
-  </span>
-
-</div>
-  <label for="e">Pin Code:</label><br>
-  <input id="e" type="text" placeholder="Pin Number" #pincode="ngModel" name="pincode" [(ngModel)]="userdata.pincode" required  pattern="^[0-9]+$" maxlength="6"><br>
-  
-  <div *ngIf="pincode.invalid && pincode.touched">
-
-  <span *ngIf="pincode.errors?.['required']" style="color: red;">
-     Pin code  is required
-  </span>
-
-</div>
-
-<div *ngIf="pincode.invalid && pincode.touched">
-
-  <span *ngIf="pincode.errors?.['pattern']" style="color: red;">
-     Only number are allowed
-  </span>
-
-</div>
-
-
-
-  <label for="f">Phone Number:</label><br>
-  <input type="text" id="f" placeholder="Phone Number" name="phone" [(ngModel)]="userdata.phone" required><br>
-
-  <label for="g">Email ID</label><br>
-  <input type="email" id="g" placeholder="Enter Email" name="email" [(ngModel)]="userdata.email" required><br>
-   
-<label for="h">State</label><br>
-
-<select class="form-select" aria-label="Default select example" id="h" name="state" [(ngModel)]="userdata.stateId" required>
-  <option value="">-- Select State --</option>
-  <option *ngFor="let state of states" [value]="state.id"  >
-    {{ state.name }}
-  </option>
-</select>
-<br>
-
-<label for="i">Country</label><br>
-<select class="form-select" aria-label="Default select example"  id="i" name="country" [(ngModel)]="userdata.countryId" required>
-    <option value="">--Country--</option>
-    <option *ngFor="let country of countrys" [value]="country.id" >{{country.name}}</option>
-
-
-</select>
-<br>
-
-
-
-
- <label for="j">Password</label><br>
- <input type="password" id="j" name="np" [(ngModel)]="userdata.np"><br>
-
- <label for="k">Confirm Passsword</label><br>
- <input type="password" id="k" required name="cp" [(ngModel)]="userdata.cp"><br>
-
- <label for="">
-    <input type="checkbox" name="ck" [(ngModel)]="userdata.ck" required>
-        I agree to the terms and conditions
- </label><br>
-<div class="d-grid gap-2 col-12 mx-auto">
-    <button class="btn btn-primary" type="submit">Register</button> 
-
-
-</div>
-
-    </form>
-
-</div>
 </div>
 
 </div>
-
-

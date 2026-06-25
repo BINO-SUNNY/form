@@ -19,7 +19,7 @@ export class Register {
    gender:'',
    dob:'',
    address:'',
-   pincode:'',
+   pincode:0,
    phone:'',
    email:'',
    stateId:'',
@@ -29,7 +29,6 @@ export class Register {
    cp:'',
    ck:''
  }
-
 
 
    states = [
@@ -59,16 +58,17 @@ constructor(private ds:Data){}
 register(){
 
   
-  
 
-
-  
   
    if(this.userdata.np!=this.userdata.cp){
     alert("password is not maching")
   }
   else{
+
+  this.userdata.pincode = +(this.userdata.pincode);
+
     this.ds.setData(this.userdata);
+
     console.log(this.userdata);
     console.log(this.userdata.ck);
 
@@ -77,6 +77,8 @@ register(){
     console.log(this.userdata.countryId);
     
 
+    console.log(this.userdata.pincode);
+    
 
     
     
@@ -93,7 +95,7 @@ clear(){
     gender: '',
     dob: '',
     address: '',
-    pincode: '',
+    pincode:0,
     phone: '',
     email: '',
     stateId: '',
