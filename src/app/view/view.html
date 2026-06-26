@@ -1,75 +1,258 @@
-<div >
+<div>
 
-  <h3>Details History</h3>
-
-
+  <h3 style="text-align: center;">Details History</h3>
 
 
-<div  class="table-container">
-<table class="table table-success table-striped table-bordered ">
-  <thead class="table-dark">
-    <tr>
-      <th>First</th>
-      <th>Last</th>
-      <th>Gender</th>
-      <th>DOB</th>
-      <th>Address</th>
-      <th>Pincode</th>
-      <th>Phone</th>
-      <th>Email</th>
-      <th>State</th>
-      <th>Country</th>
-      <th>New Password</th>
-      <th>Confirm Password</th>
-      <th>Terms and conditions staus</th>
-      
-    </tr>
-  
 
-  
-    <tr *ngFor="let item of data; let i = index" >
-      <td>{{ item.first }}</td>
-      <td>{{ item.last }}</td>
-      <td>{{ item.gender }}</td>
-      <td>{{ item.dob }}</td>
-      <td>{{ item.address }}</td>
-      <td>{{ item.pinCode }}</td>
-      <td>{{ item.phone }}</td>
-      <td>{{ item.email }}</td>
-      <td>{{item.stateName}}</td>
-      <td>{{item.countryName}}</td>
-      <td>{{ item.newPassword }}</td>
-      <td>{{ item.confirmPassword }}</td>
-      <td [style.color]="item.color">
-  {{ item.termsText }}
-</td>
 
-      <td>
-        <button class="btn btn-danger btn-sm" (click)="deleteRow(i)">
-          Delete
-        </button>
-      </td>
+  <div class="table-container">
+    <table class="table table-success table-striped table-bordered table-hover table-sm">
 
-      <td>
-        <button class="btn btn-primary btn-sm" (click)="Details(item)">
-          Details
-        </button>
-      </td>
-    </tr>
-  </thead>
-</table>
-<div *ngIf="selectedUser">
-  {{ selectedUser.first }}<br>
-  {{ selectedUser.last }}
-  <br>
-  {{ selectedUser.gender }}
-  <br>
-  {{ selectedUser.phone }}
-  <br>
-  {{ selectedUser.email }}
-  <br>
+      <thead class="table-light">
+        <tr>
+          <th>First</th>
+          <th>Last</th>
+          <th>Gender</th>
+          <th>DOB</th>
+          <th>Address</th>
+          <th>Pincode</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>State</th>
+          <th>Country</th>
+          <th>New Password</th>
+          <th>Confirm Password</th>
+          <th>Terms Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of data; let i = index">
+
+          <td>{{ item.first }}</td>
+          <td>{{ item.last }}</td>
+          <td>{{ item.gender }}</td>
+          <td>{{ item.dob }}</td>
+          <td>{{ item.address }}</td>
+          <td>{{ item.pinCode }}</td>
+          <td>{{ item.phone }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.stateName }}</td>
+          <td>{{ item.countryName }}</td>
+          <td>{{ item.newPassword }}</td>
+          <td>{{ item.confirmPassword }}</td>
+
+          <td [style.color]="item.color">
+            {{ item.termsText }}
+          </td>
+
+          <td>
+            <div class="d-flex flex-column gap-1">
+
+              <button class="btn btn-outline-warning btn-sm w-100" (click)="editDetails(item, i)" data-bs-toggle="modal"
+                data-bs-target="#editModal">
+                Edit
+              </button>
+
+              <button class="btn btn-outline-danger btn-sm w-100" (click)="deleteRow(i)">
+                Delete
+              </button>
+
+              <button class="btn btn-outline-info btn-sm w-100" (click)="Details(item)">
+                Details
+              </button>
+
+            </div>
+          </td>
+
+        </tr>
+      </tbody>
+
+    </table>
+
+
+
+    <div class="modal fade" id="staticBackdrop" tabindex="-1" data-bs-backdrop="static">
+
+      <div class="modal-dialog modal-dialog-scrollable modal-lg">
+
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title">User Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <div class="modal-body" *ngIf="selectedUser">
+
+            <div class="row g-3">
+
+              <div class="col-md-6">
+                <label class="form-label">First Name</label>
+                <input class="form-control" [value]="selectedUser.first" readonly>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Last Name</label>
+                <input class="form-control" [value]="selectedUser.last" readonly>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Gender</label>
+                <input class="form-control" [value]="selectedUser.gender" readonly>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">DOB</label>
+                <input class="form-control" [value]="selectedUser.dob" readonly>
+              </div>
+
+              <div class="col-md-12">
+                <label class="form-label">Address</label>
+                <textarea class="form-control" rows="2" readonly>{{ selectedUser.address }}</textarea>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Pincode</label>
+                <input class="form-control" [value]="selectedUser.pinCode" readonly>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Phone</label>
+                <input class="form-control" [value]="selectedUser.phone" readonly>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input class="form-control" [value]="selectedUser.email" readonly>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">State</label>
+                <input class="form-control" [value]="selectedUser.stateName" readonly>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Country</label>
+                <input class="form-control" [value]="selectedUser.countryName" readonly>
+              </div>
+
+              <div class="col-md-12">
+                <label class="form-label">Terms & Conditions</label>
+                <input class="form-control" [value]="selectedUser.checkBox ? 'Agreed' : 'Not Agreed'" readonly>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-danger" data-bs-dismiss="modal">
+              Close
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
 
-</div>
 
+<div class="modal fade" id="editModal" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+
+    <div class="modal-content">
+     
+      <div class="modal-header">
+        <h5 class="modal-title">Edit User</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="row g-3">
+
+          <div class="col-md-6">
+            <label class="form-label">First Name<span style="color:red">*</span></label>
+            <input class="form-control" [(ngModel)]="editUser.first">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Last Name<span style="color:red">*</span></label>
+            <input class="form-control" [(ngModel)]="editUser.last">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Gender<span style="color:red">*</span></label>
+            <input class="form-control" [(ngModel)]="editUser.gender">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">DOB<span style="color:red">*</span></label>
+            <input type="date" class="form-control" [(ngModel)]="editUser.dob">
+          </div>
+
+          <div class="col-md-12">
+            <label class="form-label">Address<span style="color:red">*</span></label>
+            <textarea class="form-control" rows="2" [(ngModel)]="editUser.address"></textarea>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Pincode<span style="color:red">*</span></label>
+            <input class="form-control" [(ngModel)]="editUser.pinCode">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Phone<span style="color:red">*</span></label>
+            <input class="form-control" [(ngModel)]="editUser.phone">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Email<span style="color:red">*</span></label>
+            <input class="form-control" [(ngModel)]="editUser.email" >
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">State<span style="color:red">*</span></label>
+            <select class="form-select" [(ngModel)]="editUser.stateName">
+              <option *ngFor="let state of states" [value]="state.name">
+                {{ state.name }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Country<span style="color:red">*</span></label>
+            <select class="form-select" [(ngModel)]="editUser.countryName">
+              <option *ngFor="let country of countrys" [value]="country.name">
+                {{ country.name }}
+              </option>
+            </select>
+
+    
+            
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+
+        <button class="btn btn-success" (click)="updateUser()">
+          Update
+        </button>
+      </div>
+    </div>
+
+  </div>
 </div>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Data } from '../servies/data';
 import { CommonModule } from '@angular/common';
 
@@ -46,7 +46,7 @@ export class Register {
   ]
 
   
-constructor(private ds:Data){}
+constructor(private ds:Data,private router:Router){}
 
 
 
@@ -55,22 +55,34 @@ constructor(private ds:Data){}
 
 
 register(form: any) {
-  debugger
 
   if (form.invalid) {
-    alert("Please fill all required fields correctly");
+    const modalEl = document.getElementById('alertMessageError')
+
+      const modal = new (window as any).bootstrap.Modal(modalEl);
+
+      modal.show();
     return;
   }
 
   if (this.userdata.newPassword !== this.userdata.confirmPassword) {
-    alert("Password not matching");
+   const modalEl = document.getElementById('alertMessageErrorPassword')
+
+      const modal = new (window as any).bootstrap.Modal(modalEl);
+
+      modal.show();
     return;
   }
 
   this.ds.setData(this.userdata);
-  alert("Register successful");
+
+  const modalEl = document.getElementById('alertMessage');
+      const modal = new (window as any).bootstrap.Modal(modalEl);
+
+      modal.show();
   this.clear()
 }
+
 
 clear(){
   
@@ -131,6 +143,35 @@ forPassword(event:KeyboardEvent){
   if(!/^[a-zA-Z0-9@#$%&_+\-!*]$/.test(key)){
     event.preventDefault()
   }
+}
+
+goToRegister() {
+  const modalEl = document.getElementById('alertMessage');
+  const modal = (window as any).bootstrap.Modal.getInstance(modalEl);
+
+  modal.hide();
+  this.router.navigateByUrl('/Register');
+}
+
+
+
+gooToRegister() {
+  const modalEl = document.getElementById('alertMessageError')
+
+  const modal = (window as any).bootstrap.Modal.getInstance(modalEl);
+
+  modal.hide();
+  this.router.navigateByUrl('/Register');
+}
+
+
+gooTooRegister() {
+  const modalEl = document.getElementById('alertMessageErrorPassword')
+
+  const modal = (window as any).bootstrap.Modal.getInstance(modalEl);
+
+  modal.hide();
+  this.router.navigateByUrl('/Register');
 }
 
 

@@ -22,27 +22,57 @@ export class Login {
 
 
 
-  login(){
-  
-    if(this.uname=="admin"){
-      if(this.pass=="admin"){
+login() {
+  if (this.uname == "admin") {
+    if (this.pass == "admin") {
 
-        alert("login successful..")
-        this.router.navigateByUrl('Register')
+      const modalEl = document.getElementById('alertMessage');
+      const modal = new (window as any).bootstrap.Modal(modalEl);
 
+      modal.show();
 
-      }
-      else{
-        alert("password is not maching..")
+    } else {
+      const modalEl = document.getElementById('alertMessageErrorPassword')
 
-      }
+      const modal = new (window as any).bootstrap.Modal(modalEl);
 
-    }
-    else{
-      alert("user not exist...")
+      modal.show();
     }
 
-    
+  } else {
+    const modalEl = document.getElementById('alertMessageErrorUser')
+
+      const modal = new (window as any).bootstrap.Modal(modalEl);
+
+      modal.show();
   }
+}
+
+
+goToRegister() {
+  const modalEl = document.getElementById('alertMessage');
+  const modal = (window as any).bootstrap.Modal.getInstance(modalEl);
+
+  modal.hide();
+  this.router.navigateByUrl('/Register');
+}
+
+gooTooRegister() {
+  const modalEl = document.getElementById('alertMessageErrorPassword')
+
+  const modal = (window as any).bootstrap.Modal.getInstance(modalEl);
+
+  modal.hide();
+  this.router.navigateByUrl('');
+}
+
+gooTTooRegister() {
+  const modalEl = document.getElementById('alertMessageErrorUser')
+
+  const modal = (window as any).bootstrap.Modal.getInstance(modalEl);
+
+  modal.hide();
+  this.router.navigateByUrl('');
+}
 
 }

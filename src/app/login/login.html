@@ -9,6 +9,83 @@
     <input type="password" id="p"  placeholder="password" name="pass" [(ngModel)]="pass" required ><br>
 
     <button type="submit">Login</button>
+
+
  </form>
 
+
+</div>
+
+
+
+ <!-- Flexbox container for aligning the toasts -->
+<div class="modal fade" id="alertMessage" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Massege</h5>
+      </div>
+
+      <div class="modal-body">
+        Login Sussessfully
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="goToRegister()">
+          OK
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- error password not maching message -->
+<div class="modal fade" id="alertMessageErrorPassword" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Massege</h5>
+      </div>
+
+      <div class="modal-body">
+       Passsword not maching
+      </div>
+
+      <div class="modal-footer" >
+        <button type="button" class="btn btn-danger" (click)="gooTooRegister()" style="background-color: red;">
+          OK
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- user not exist  -->
+
+<div class="modal fade" id="alertMessageErrorUser" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Massege</h5>
+      </div>
+
+      <div class="modal-body">
+       User not exist...
+      </div>
+
+      <div class="modal-footer" >
+        <button type="button" class="btn btn-danger" (click)="gooTTooRegister()" style="background-color: red;">
+          OK
+        </button>
+      </div>
+
+    </div>
+  </div>
 </div>

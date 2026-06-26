@@ -12,3 +12,20 @@ th, td{
   padding: 10px;
   text-align: center;
 }
+
+table {
+  font-size: 13px;
+}
+
+table td,
+table th {
+  padding: 4px 8px;
+}
+
+td, th {
+  white-space: nowrap;
+
+}
+table tbody tr:hover {
+  background-color: #e58484;
+}

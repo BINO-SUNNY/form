@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Data } from '../servies/data';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-view',
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './view.html',
   styleUrl: './view.css',
 })
@@ -14,6 +15,9 @@ export class View {
 
 
   selectedUser: any;
+
+  editUser: any = {};
+editIndex!: number;
 
 itemsWithNames: any[] = [];
 
@@ -56,7 +60,7 @@ itemsWithNames: any[] = [];
     })
 
 
-    this.data.forEach(item => {
+  this.data.forEach(item => {
   item.stateName = this.states.find(s => s.id == item.stateId)?.name || '';
   item.countryName = this.countrys.find(c => c.id == item.countryId)?.name || '';
 });
@@ -76,20 +80,27 @@ Details(item: any) {
   
   this.selectedUser = item;
 
+  const modal = new (window as any).bootstrap.Modal(
+    document.getElementById('staticBackdrop')
+  );
+
+  modal.show()
+
 
 }
 
-
-
-
-prepareItems() {
-  this.data.forEach(item => {
-    item.stateName = this.states.find(s => s.id == item.stateId)?.name || '';
-    item.countryName = this.countrys.find(c => c.id == item.countryId)?.name || '';
-  });
+editDetails(item: any, index: number) {
+  this.editUser = { ...item };   // Copy object
+  this.editIndex = index;
 }
 
+updateUser() {
+  this.data[this.editIndex] = { ...this.editUser };
 
+  const modal = document.getElementById('editModal');
+  const modalInstance = (window as any).bootstrap.Modal.getInstance(modal);
+  modalInstance.hide();
+}
 
 
 
