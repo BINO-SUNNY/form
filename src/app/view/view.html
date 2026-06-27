@@ -164,6 +164,10 @@
 </div>
 
 
+
+
+
+
 <div class="modal fade" id="editModal" tabindex="-1">
   <div class="modal-dialog modal-lg modal-dialog-scrollable">
 
@@ -180,64 +184,249 @@
 
           <div class="col-md-6">
             <label class="form-label">First Name<span style="color:red">*</span></label>
-            <input class="form-control" [(ngModel)]="editUser.first">
+            <input class="form-control"   #first="ngModel"   [(ngModel)]="editUser.first" required maxlength="30" pattern="^[A-Za-z ]+$"  (keypress)="onlyAlphabets($event)">
+
+           <div *ngIf="first.invalid && first.touched">
+          <span *ngIf="first.errors?.['required']" style="color: red;">
+            First name is required.
+          </span>
+        </div>
+
+        <div *ngIf="first.invalid && first.touched">
+
+          <span *ngIf="first.errors?.['pattern']" style="color: red;">
+            Only letters are allowed
+          </span>
+
+        </div>
+
           </div>
+
+          
 
           <div class="col-md-6">
             <label class="form-label">Last Name<span style="color:red">*</span></label>
-            <input class="form-control" [(ngModel)]="editUser.last">
+            <input class="form-control" #last="ngModel" [(ngModel)]="editUser.last" pattern="^[A-Za-z ]+$" (keypress)="onlyAlphabets($event)">
+
+               <div *ngIf="last.invalid && last.touched">
+
+          <span *ngIf="last.errors?.['pattern']" style="color: red;">
+            Only letters are allowed
+          </span>
+
+        </div>
           </div>
+
+
+       
 
           <div class="col-md-6">
-            <label class="form-label">Gender<span style="color:red">*</span></label>
-            <input class="form-control" [(ngModel)]="editUser.gender">
+           <input class="form-control" #gender="ngModel" [(ngModel)]="editUser.gender" required>           
+  <label class="form-label">
+    Gender <span style="color:red">*</span>
+  </label>
+
+  <div>
+    <label>
+      <input
+        type="radio"
+        name="gender"
+        value="Male"
+        [(ngModel)]="editUser.gender"
+        #gender="ngModel"
+        required>
+      Male
+    </label>
+
+    <label class="ms-3">
+      <input
+        type="radio"
+        name="gender"
+        value="Female"
+        [(ngModel)]="editUser.gender">
+      Female
+    </label>
+
+    <label class="ms-3">
+      <input
+        type="radio"
+        name="gender"
+        value="Other"
+        [(ngModel)]="editUser.gender">
+      Other
+    </label>
+  </div>
+
+  <div *ngIf="gender.invalid && gender.touched">
+    <span style="color:red">Gender is required.</span>
+  </div>
+</div>
+                 <div *ngIf="gender.invalid && gender.touched">
+          <span *ngIf="gender.errors?.['required']" style="color: red;" pattern="^[A-Za-z ]+$">
+            Gender is required.
+          </span>
+        </div>
+
           </div>
 
+          
+   
           <div class="col-md-6">
             <label class="form-label">DOB<span style="color:red">*</span></label>
-            <input type="date" class="form-control" [(ngModel)]="editUser.dob">
+            <input type="date" #date="ngModel" class="form-control" [(ngModel)]="editUser.dob" required>
+
+             <div *ngIf="date.invalid && date.touched">
+
+          <span *ngIf="date.errors?.['required']" style="color: red;">
+            Date of birth is required
+          </span>
+
+        </div>
+
           </div>
+
+         
 
           <div class="col-md-12">
             <label class="form-label">Address<span style="color:red">*</span></label>
-            <textarea class="form-control" rows="2" [(ngModel)]="editUser.address"></textarea>
+            <textarea class="form-control" #address="ngModel" rows="2" [(ngModel)]="editUser.address" required  (keypress)="onlyAlphabetsAndNumber($event)"></textarea>
+
+              <div *ngIf="address.invalid && date.touched">
+
+          <span *ngIf="address.errors?.['required']" style="color: red;">
+          Address is required
+          </span>
+
+        </div>
           </div>
+
+
+
 
           <div class="col-md-6">
             <label class="form-label">Pincode<span style="color:red">*</span></label>
-            <input class="form-control" [(ngModel)]="editUser.pinCode">
+            <input class="form-control" #pincode="ngModel" [(ngModel)]="editUser.pinCode" required pattern="^[0-9]+$" maxlength="6" (keypress)="onlyNumber($event)">
+
+            <div *ngIf="pincode.invalid && pincode.touched">
+
+          <span *ngIf="pincode.errors?.['required']" style="color: red;">
+            Pin code is required
+          </span>
+
+        </div>
+
+        <div *ngIf="pincode.invalid && pincode.touched">
+
+          <span *ngIf="pincode.errors?.['pattern']" style="color: red;">
+            Only number are allowed
+          </span>
+
+        </div>
+
+
           </div>
 
           <div class="col-md-6">
             <label class="form-label">Phone<span style="color:red">*</span></label>
-            <input class="form-control" [(ngModel)]="editUser.phone">
+            <input class="form-control" #phone="ngModel" [(ngModel)]="editUser.phone" required  pattern="^\+?[0-9]{7,15}$" maxlength="15" (keypress)="onlyNumber($event)">
+
+                    <div *ngIf="phone.invalid && phone.touched">
+
+          <span *ngIf="phone.errors?.['required']" style="color: red;">
+            Phone number is required
+          </span>
+
+        </div>
+
+        <div *ngIf="phone.invalid && phone.touched">
+
+          <span *ngIf="phone.errors?.['pattern']" style="color: red;">
+            Please enter a valid phone number.
+          </span>
+
+        </div>
           </div>
 
           <div class="col-md-6">
             <label class="form-label">Email<span style="color:red">*</span></label>
-            <input class="form-control" [(ngModel)]="editUser.email" >
+            <input class="form-control"#email="ngModel" [(ngModel)]="editUser.email" required  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"  (keypress)="forEmail($event)">
+
+
+            
+        <div *ngIf="email.invalid && email.touched">
+
+          <span *ngIf="email.errors?.['required']" style="color: red;">
+            email is required
+          </span>
+
+        </div>
+
+        <div *ngIf="email.invalid && email.touched">
+
+          <span *ngIf="email.errors?.['pattern']" style="color: red;">
+            Please enter a valid Email.
+          </span>
+
+        </div>
+        
           </div>
 
           <div class="col-md-6">
             <label class="form-label">State<span style="color:red">*</span></label>
-            <select class="form-select" [(ngModel)]="editUser.stateName">
+            <select class="form-select" #state="ngModel"[(ngModel)]="editUser.stateName" required>
               <option *ngFor="let state of states" [value]="state.name">
                 {{ state.name }}
               </option>
             </select>
+
+            <div *ngIf="state.invalid && state.touched">
+
+          <span *ngIf="state.errors?.['required']" style="color: red;">
+            State is required
+          </span>
+
+        </div>
           </div>
 
           <div class="col-md-6">
             <label class="form-label">Country<span style="color:red">*</span></label>
-            <select class="form-select" [(ngModel)]="editUser.countryName">
+            <select class="form-select" #country="ngModel" [(ngModel)]="editUser.countryName" required>
               <option *ngFor="let country of countrys" [value]="country.name">
                 {{ country.name }}
               </option>
             </select>
 
+            <div *ngIf="country.invalid && country.touched">
+
+          <span *ngIf="country.errors?.['required']" style="color: red;">
+            country is required
+          </span>
+
+        </div>
+
+        <div class="col-md-6">
+  <label class="form-label">New Password<span style="color:red">*</span></label>
+  <input type="password"
+    class="form-control"
+    name="newPassword"
+    #newp="ngModel"
+    [(ngModel)]="editUser.newPassword"
+    required
+    maxlength="8"
+    pattern="(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}" (keypress)="forPassword($event)"  ata-bs-toggle="tooltip"  data-bs-placement="right" title="Password">
+</div>
+
+<div class="col-md-6">
+  <label class="form-label">Confirm Password<span style="color:red">*</span></label>
+  <input type="password"
+    class="form-control"
+    name="confirmPassword"
+    #cp="ngModel"
+    [(ngModel)]="editUser.confirmPassword"
+    required>
+</div>
     
             
-          </div>
 
         </div>
 
@@ -254,5 +443,52 @@
       </div>
     </div>
 
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="toast-container position-fixed top-0 end-0 p-3">
+  <div id="liveToast" class="toast text-bg-danger border-0" role="alert">
+
+    <div class="d-flex">
+      <div class="toast-body">
+        Message
+      </div>
+
+      <button type="button" class="btn-close btn-close-white me-2 m-auto"
+        data-bs-dismiss="toast"></button>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="alertMessageErrorPassword" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Massege</h5>
+      </div>
+
+      <div class="modal-body">
+       Passsword not maching
+      </div>
+
+      <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+  OK
+</button>>
+
+    </div>
   </div>
 </div>

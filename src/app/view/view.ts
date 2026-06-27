@@ -94,16 +94,102 @@ editDetails(item: any, index: number) {
   this.editIndex = index;
 }
 
+// updateUser() {
+//   this.data[this.editIndex] = { ...this.editUser };
+
+//   const modal = document.getElementById('editModal');
+//   const modalInstance = (window as any).bootstrap.Modal.getInstance(modal);
+//   modalInstance.hide();
+// }
+
 updateUser() {
+  const u = this.editUser;
+
+  if (!u.first) return this.showToast('First Name is required');
+  if (!u.gender) return this.showToast('Gender is required');
+  if (!u.dob) return this.showToast('DOB is required');
+  if (!u.address) return this.showToast('Address is required');
+  if (!u.pinCode) return this.showToast('Pincode is required');
+  if (!u.phone) return this.showToast('Phone is required');
+  if (!u.email) return this.showToast('Email is required');
+  if (!u.stateName) return this.showToast('State is required');
+  if (!u.countryName) return this.showToast('Country is required');
+
+  
+if (this.editUser.newPassword !== this.editUser.confirmPassword) {
+   const modalEl = document.getElementById('alertMessageErrorPassword')
+
+      const modal = new (window as any).bootstrap.Modal(modalEl);
+
+      modal.show();
+    return;
+  }
+
+
   this.data[this.editIndex] = { ...this.editUser };
 
   const modal = document.getElementById('editModal');
   const modalInstance = (window as any).bootstrap.Modal.getInstance(modal);
   modalInstance.hide();
+
+  this.showToast('User updated successfully');
 }
 
 
+// display toast
 
+showToast(message: string) {
+  const toastEl = document.getElementById('liveToast');
+
+  if (toastEl) {
+    toastEl.querySelector('.toast-body')!.textContent = message;
+
+    const toast = new (window as any).bootstrap.Toast(toastEl);
+    toast.show();
+  }
+}
+
+
+onlyAlphabets(event: KeyboardEvent) {
+  const key = event.key;
+
+  if (!/^[a-zA-Z ]$/.test(key)) {
+    event.preventDefault();
+  }
+}
+
+
+onlyAlphabetsAndNumber(event: KeyboardEvent) {
+  const key = event.key;
+
+if (!/^[a-zA-Z0-9 ,./#-]$/.test(key)) {
+    event.preventDefault();
+  }
+}
+
+
+onlyNumber(event:KeyboardEvent){
+  const key =event.key
+
+  if(!/^[0-9]$/.test(key)){
+    event.preventDefault()
+  }
+}
+
+forEmail(event:KeyboardEvent){
+  const key =event.key
+
+  if(!/^[a-zA-Z0-9@._+-]$/.test(key)){
+    event.preventDefault()
+  }
+}
+forPassword(event:KeyboardEvent){
+  const key =event.key
+
+  if(!/^[a-zA-Z0-9@#$%&_+\-!*]$/.test(key)){
+    event.preventDefault()
+  }
+}
 
 
 }

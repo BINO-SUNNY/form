@@ -1,4 +1,4 @@
-<div class="container-fluid align-items-center">
+<!-- <div class="container-fluid align-items-center">
 
 <div class="col-12 col-md col-lg col-xl col-sm">
 
@@ -264,8 +264,7 @@
 
 </div>
 
-<!-- susssessfull massege -->
- <!-- Flexbox container for aligning the toasts -->
+
 <div class="modal fade" id="alertMessage" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -288,7 +287,6 @@
   </div>
 </div>
 
-<!-- error password not maching message -->
 <div class="modal fade" id="alertMessageErrorPassword" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -351,4 +349,265 @@
       Hello, world! This is a toast message.
     </div>
   </div>
+</div> -->
+
+
+
+<!-- reactiveForm -->
+
+
+<div class="container-fluid align-items-center">
+
+<div class="col-12 col-md col-lg col-xl col-sm">
+
+
+  <nav class="navbar bg-primary" style="padding: 10px; margin-bottom: 10px;" data-bs-theme="dark">
+    <button class="btn btn-warning" routerLink="">Back</button>
+    <h3 style="color: white;">Welcom Admin</h3>
+    <div class="btn-group" role="group">
+      <button class="btn btn-success" routerLink="/view">View</button> <button class="btn btn-danger" (click)="clearReactiveForm()"
+        type="submit">Clear From</button>
+
+    </div>
+  </nav>
+
+  <div>
+
+    <div class="container">
+
+
+
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+
+  <h3 style="background-color: green;">Register FORM</h3>
+
+  <label>First Name <span style="color:red">*</span></label><br>
+
+  <input type="text" formControlName="first" (keypress)="onlyAlphabets($event)" class="form-control">
+
+  <div *ngIf="registerForm.get('first')?.touched && registerForm.get('first')?.invalid">
+    <small style="color:red" *ngIf="registerForm.get('first')?.errors?.['required']">
+      First name is required
+    </small>
+
+    <small style="color:red" *ngIf="registerForm.get('first')?.errors?.['pattern']">
+      Only letters allowed
+    </small>
+
+    <small style="color:red" *ngIf="registerForm.get('first')?.errors?.['maxlength']">
+      Max 30 characters allowed
+    </small>
+  </div>
+
+
+  <label>Last Name</label><br>
+
+  <input type="text" formControlName="last" (keypress)="onlyAlphabets($event)" class="form-control">
+
+  <div *ngIf="registerForm.get('last')?.touched && registerForm.get('last')?.invalid">
+    <small style="color:red" *ngIf="registerForm.get('last')?.errors?.['pattern']">
+      Only letters allowed
+    </small>
+  </div>
+
+
+  <label>Gender <span style="color:red">*</span></label><br>
+
+  <input type="radio" formControlName="gender" value="male"> Male
+  <input type="radio" formControlName="gender" value="female"> Female
+  <input type="radio" formControlName="gender" value="others"> Others
+
+  <div *ngIf="registerForm.get('gender')?.touched && registerForm.get('gender')?.invalid">
+    <small style="color:red">Gender is required</small>
+  </div>
+<br>
+
+  <label>DOB <span style="color:red">*</span></label><br>
+  <input type="date" formControlName="dob" class="form-control">
+
+  <div *ngIf="registerForm.get('dob')?.touched && registerForm.get('dob')?.invalid">
+    <small style="color:red">Date of birth is required</small>
+  </div>
+
+
+  <label>Address <span style="color:red">*</span></label><br>
+  <textarea formControlName="address" class="form-control"></textarea>
+
+  <div *ngIf="registerForm.get('address')?.touched && registerForm.get('address')?.invalid">
+    <small style="color:red">Address is required</small>
+  </div>
+
+
+  <label>Pin Code</label><br>
+  <input type="text" formControlName="pinCode" (keypress)="onlyNumber($event)" class="form-control">
+
+  <div *ngIf="registerForm.get('pinCode')?.touched && registerForm.get('pinCode')?.invalid">
+    <small style="color:red">Invalid pin code (must be 6 digits)</small>
+  </div>
+
+
+  <label>Phone</label><br>
+  <input type="text" formControlName="phone" (keypress)="onlyNumber($event)" class="form-control">
+
+  <div *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.invalid">
+    <small style="color:red">Invalid phone number</small>
+  </div>
+
+
+  <label>Email</label><br>
+  <input type="email" formControlName="email" class="form-control">
+
+  <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
+    <small style="color:red">Enter valid email</small>
+  </div>
+
+
+  <label>State</label><br>
+  <select formControlName="stateId" class="form-select">
+
+
+    <option value="">-- Select State --</option>
+    <option *ngFor="let state of states" [value]="state.id">
+      {{ state.name }}
+    </option>
+  </select>
+
+  <div *ngIf="registerForm.get('stateId')?.touched && registerForm.get('stateId')?.invalid">
+    <small style="color:red">State is required</small>
+  </div>
+
+
+  <label>Country</label><br>
+  <select formControlName="countryId" class="form-select">
+    <option value="">-- Select Country --</option>
+    <option *ngFor="let country of countrys" [value]="country.id">
+      {{ country.name }}
+    </option>
+  </select>
+
+  <div *ngIf="registerForm.get('countryId')?.touched && registerForm.get('countryId')?.invalid">
+    <small style="color:red">Country is required</small>
+  </div>
+
+
+  <label>Password</label><br>
+  <input type="password" formControlName="newPassword" class="form-control">
+
+  <div *ngIf="registerForm.get('newPassword')?.touched && registerForm.get('newPassword')?.invalid">
+    <small style="color:red">Password must be strong (8 chars, number, special char)</small>
+  </div>
+
+
+  <label>Confirm Password</label><br>
+  <input type="password" formControlName="confirmPassword" class="form-control">
+
+  <div *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid">
+    <small style="color:red">Confirm password is required</small>
+  </div>
+
+
+  <label>
+    <input type="checkbox" formControlName="checkBox">
+    I agree to terms
+  </label>
+<br>
+
+  <button class="btn btn-primary" type="submit">
+    Register
+  </button>
+
+</form>
+
+    </div>
+  </div>
+
 </div>
+
+</div>
+
+
+<div class="modal fade" id="alertMessage" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Massege</h5>
+      </div>
+
+      <div class="modal-body">
+        Register Sussessfully
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="goToRegister()">
+          OK
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="alertMessageErrorPassword" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Massege</h5>
+      </div>
+
+      <div class="modal-body">
+       Passsword not maching
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="gooTooRegister()">
+          OK
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="alertMessageError" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Massege</h5>
+      </div>
+
+      <div class="modal-body">
+       Please fill all required fields correctly
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="gooToRegister()">
+          OK
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="..." class="rounded me-2" alt="...">
+      <strong class="me-auto">Bootstrap</strong>
+      <small>11 mins ago</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Hello, world! This is a toast message.
+    </div>
+  </div>
+</div> -->
